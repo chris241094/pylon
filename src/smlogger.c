@@ -235,8 +235,17 @@ void processMeasurement(const SmartMeter_Data* m)
 			printf("\n");
 		} else {
 			// Print all values
-			for (SmartMeter_VarID id = 0; id < NUM_VARIABLES; id++) {
-				printf("%f%c", m->val[id], id < NUM_VARIABLES-1 ? '\t' : '\n');
+			FILE *f = open("logfile.txt", "w");
+			if (f == NULL) {
+				printf("Error while opening log file");
+			} else {
+				printf("Opened file\n");
+				for (SmartMeter_VarID id = 0; id < NUM_VARIABLES; id++) {
+					printf("%f%c", m->val[id], id < NUM_VARIABLES-1 ? '\t' : '\n');
+					fprintf(f, "%f%c", m->val[id], id < NUM_VARIABLES-1 ? '\t' : '\n');
+				}
+				fclose(f);
+				printf("Closed file\n");
 			}
 		}
 	}

@@ -235,7 +235,7 @@ void processMeasurement(const SmartMeter_Data* m)
 			printf("\n");
 		} else {
 			// Print all values
-			FILE *f = open("logfile.txt", "w");
+			FILE *f = fopen("logfile.txt", "w");
 			if (f == NULL) {
 				printf("Error while opening log file");
 			} else {
